@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  padding-top: 2rem;
+
+  .input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+}
+
+button {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  background-color: #eaeaea;
+  cursor: pointer;
+}
+
+.dateGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 2rem;  
+}
+
+.groupWrapper {
+  gap: .5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+}
