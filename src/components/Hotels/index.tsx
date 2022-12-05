@@ -53,7 +53,7 @@ const Hotel: React.FC<HotelProps> = ({ hotel: {
       <span>Endereço: {hotelAddress.addressLine1}</span>
       <span>Preço: {roomPrice} {currency}</span>
       <span>Estrelas: {hotelStarRating}</span>
-      <span>Descrição: {limitChar(hotelDescription, 150)} <button onClick={() => setLongText(!longText)}>{longText ? "Esconder" : "Ler mais"}</button></span>
+      <span>Descrição: {limitChar(hotelDescription, 150)} <button className={styles.type} onClick={() => setLongText(!longText)}>{longText ? "Esconder" : "Ler mais"}</button></span>
       <span>Nome do quarto: {roomName}</span>
       <span>Descrição do quarto: {roomLongDescription}</span>
       <span>Marca: {hotelBrand}</span>  

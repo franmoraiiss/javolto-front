@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Hotel from "../Hotels";
 import Travel from "../Travel";
 import Vehicle from "../Vehicles";
@@ -57,30 +57,55 @@ interface ResultsProps {
 }
 
 const Results: React.FC<ResultsProps> = ({ results }) => {
+  const [showTravel, setShowTravel] = useState(false);
+  const [showHotel, setShowHotel] = useState(false);
+  const [showVehicle, setShowVehicle] = useState(false);
+
   return (
     <div className={styles.container}>
       RESULTADOS ENCONTRADOS
     
-      <div style={{ marginTop: "1rem" }}>
-        <span>Viagens</span>
-        {results?.travels?.map((travel) => (	
-          <Travel travel={travel} />
-        ))}
-      </div>
-
-      <div style={{ marginTop: "1rem" }}>
-        <span>Hoteis</span>
-        {results?.hotels?.map((hotel) => (
-          <Hotel hotel={hotel} />
-        ))}
-      </div>
-
-      Veiculos:
-      {results?.vehicles?.map((vehicle) => (
-          <Vehicle vehicle={vehicle} />
-      ))}
+      {results?.travels && (
+        <div style={{ marginTop: "1rem", width: "500px" }}>
+          <button className={styles.type} onClick={() => setShowTravel(!showTravel)}>Viagens</button>
           
+          {showTravel && (
+            <>
+              {results?.travels?.map((travel) => (	
+                <Travel travel={travel} />
+              ))}
+            </>
+          )}        
+        </div>
+      )}      
 
+      {results?.hotels && (
+        <div style={{ marginTop: "1rem", width: "500px"  }}>
+          <button className={styles.type} onClick={() => setShowHotel(!showHotel)}>Hoteis</button>
+
+          {showHotel && (
+            <>
+              {results?.hotels?.map((hotel) => (
+                <Hotel hotel={hotel} />
+              ))}
+            </>
+          )}
+        </div>
+      )}
+
+      {results?.vehicles && (
+        <div style={{ marginTop: "1rem", width: "500px"  }}>
+          <button className={styles.type} onClick={() => setShowVehicle(!showVehicle)}>Veículos</button>
+
+          {showVehicle && (
+            <>
+              {results?.vehicles?.map((vehicle) => (
+                <Vehicle vehicle={vehicle} />
+              ))}
+            </>          
+          )}        
+        </div>
+      )}
     </div>
   );
 }

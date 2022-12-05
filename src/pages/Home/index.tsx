@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MoonLoader } from 'react-spinners';
 
 import Results from '../../components/Results';
 import Search from '../../components/Search';
@@ -65,9 +66,12 @@ const API_URL = "https://c5t5kx5f7dwmirjzulrbv55kje0nlnta.lambda-url.us-east-1.o
 
 const Home = () => {
   const [results, setResults] = useState<IResults | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const getResults = async (params: IParams) => {
-    try {  
+    try {
+      setIsLoading(true);
+
       const response = await api.get(API_URL, {
         params
       });
@@ -75,19 +79,31 @@ const Home = () => {
       setResults(response.data);
     } catch(error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
   return (
     <div className={styles.container}>
-    <h1 className={styles.title}>Jávolto</h1>
+      {results && (
+        <div className={styles.back}><span onClick={() => setResults(undefined)}>{`<`}</span></div>      
+      )}      
 
-    <Search getResults={getResults} />
+      <h1 className={styles.title}>Jávolto</h1>
 
-    {results && (
-      <Results results={results} />
-    )}
-  </div>
+      {results ? (
+        <Results results={results} />
+      ) : (        
+        <Search getResults={getResults} />
+      )}
+
+      {isLoading && (
+        <div className={styles.overlay}>
+          <MoonLoader color="#fff" />
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -11,7 +11,7 @@ interface IParams {
   city: string;
   checkInDate: string;
   checkOutDate: string;
-  // rooms?: number;
+  people?: number;
   type: string;
 }
 
@@ -21,13 +21,14 @@ const Search: React.FC<SearchProps> = ({ getResults }) => {
   const [destination, setDestination] = useState("Berlin");
   const [checkInDate, setCheckInDate] = useState(formatISO(new Date(), { representation: "date" }));
   const [checkOutDate, setCheckOutDate] = useState(formatISO(addDays(new Date(), 1), { representation: "date" }));
-  const [rooms, setRooms] = useState<number | undefined>();
+  const [people, setPeople] = useState<number | undefined>();
   const [type, setType] = useState("");
 
   const [params, setParams] = useState<IParams>({
     city: destination,
     checkInDate,
     checkOutDate,
+    people,
     type,
   }); 
 
@@ -36,9 +37,10 @@ const Search: React.FC<SearchProps> = ({ getResults }) => {
       city: destination,
       checkInDate,
       checkOutDate,
+      people,
       type
     });
-  }, [destination, checkInDate, checkOutDate, type]);
+  }, [destination, checkInDate, checkOutDate, type, people]);
 
   const onChangeCategory = (category: string) => {
     if (type.includes(category)) {  
@@ -74,8 +76,8 @@ const Search: React.FC<SearchProps> = ({ getResults }) => {
       </div>
 
       <div>
-        <label htmlFor="rooms">Quartos:</label>
-        <input id="rooms" className={styles.input} type="number" placeholder="Número de quartos" value={rooms} onChange={(e) => setRooms(Number(e.target.value))} />
+        <label htmlFor="rooms">Pessoas:</label>
+        <input id="rooms" className={styles.input} type="number" placeholder="Número de pessoas" value={people} onChange={(e) => setPeople(Number(e.target.value))} />
       </div>
 
       <span style={{ margin: ".5rem 0"}}>Categoria:</span>
